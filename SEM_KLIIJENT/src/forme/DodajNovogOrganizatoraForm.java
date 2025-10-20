@@ -22,6 +22,7 @@ public class DodajNovogOrganizatoraForm extends javax.swing.JFrame {
      */
     public DodajNovogOrganizatoraForm() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**

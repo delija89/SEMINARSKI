@@ -5,7 +5,6 @@
 package kontorleri;
 
 import domen.OrganizatorLova;
-import forme.LoginForm;
 import forme.MainForm;
 import koridnator.Kordinator;
 

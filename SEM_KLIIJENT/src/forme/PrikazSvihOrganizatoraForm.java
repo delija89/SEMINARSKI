@@ -19,6 +19,7 @@ public class PrikazSvihOrganizatoraForm extends javax.swing.JFrame {
      */
     public PrikazSvihOrganizatoraForm() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
