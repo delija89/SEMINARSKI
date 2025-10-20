@@ -25,7 +25,7 @@ public class Konfiguracija {
     private Konfiguracija() {
         try {
             konfiguracija = new Properties();
-            konfiguracija.load(new FileInputStream("C:\\Users\\Dzaja\\Desktop\\SEMINARSKI\\MOJ SEMINARSKI\\SEM_SERVER\\config\\config.properties"));
+            konfiguracija.load(new FileInputStream("C:\\Users\\Dzaja\\Desktop\\SEMINARSKI\\SISTEM ZA UPRAVLJANJE REZEVACIJAMA LOVA\\SEM_SERVER\\config\\config.properties"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Konfiguracija.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -51,7 +51,7 @@ public class Konfiguracija {
 
     public void sacuvajIzmene() {
         try {
-            konfiguracija.store(new FileOutputStream("C:\\Users\\Dzaja\\Desktop\\SEMINARSKI\\MOJ SEMINARSKI\\SEM_SERVER\\config\\config.properties"), null);
+            konfiguracija.store(new FileOutputStream("C:\\Users\\Dzaja\\Desktop\\SEMINARSKI\\SISTEM ZA UPRAVLJANJE REZEVACIJAMA LOVA\\SEM_SERVER\\config\\config.properties"), null);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
             Logger.getLogger(Konfiguracija.class.getName()).log(Level.SEVERE, null, ex);
