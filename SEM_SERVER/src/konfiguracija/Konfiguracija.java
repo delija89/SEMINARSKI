@@ -26,9 +26,6 @@ public class Konfiguracija {
         try {
             konfiguracija = new Properties();
             konfiguracija.load(new FileInputStream("C:\\Users\\Dzaja\\Desktop\\SEMINARSKI\\MOJ SEMINARSKI\\SEM_SERVER\\config\\config.properties"));
-            //String putanja = "config/config.properties";
-            //File configFile = new File(putanja);
-            //konfiguracija.load(new FileInputStream(configFile));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Konfiguracija.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
