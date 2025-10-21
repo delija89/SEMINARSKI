@@ -6,6 +6,7 @@ package komunikacija;
 
 import domen.Opstina;
 import domen.OrganizatorLova;
+import domen.RezervacijaLova;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -121,5 +122,16 @@ public class Komunikacija {
             ((Exception) odg.getOdgovor()).printStackTrace();
             throw new Exception("GRESKA U IZMENI");
         }
+    }
+
+    public List<RezervacijaLova> ucitajRezervacije() {
+        List<RezervacijaLova> sveRezervacije = new ArrayList<>();
+        Zahtev z = new Zahtev(Operacija.UCITAJ_REZERVACIJE, null);
+
+        posiljaoc.posalji(z);
+
+        Odgovor odg = (Odgovor) primalac.primi();
+        sveRezervacije = (List<RezervacijaLova>) odg.getOdgovor();
+        return sveRezervacije;
     }
 }

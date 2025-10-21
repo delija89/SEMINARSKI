@@ -6,6 +6,7 @@ package niti;
 
 import domen.Opstina;
 import domen.OrganizatorLova;
+import domen.RezervacijaLova;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
@@ -79,6 +80,12 @@ public class ObradaKlijentskihZahteva extends Thread {
                         OrganizatorLova ol3 = (OrganizatorLova) zahtev.getParametar();
                         Kontroler.getInstance().azurirajOrganizatora(ol3);
                         odgovor.setOdgovor(null);
+                        break;
+
+                    case UCITAJ_REZERVACIJE:
+                        List<RezervacijaLova> sveRezervacije = Kontroler.getInstance().ucitajRezervacije();
+                        System.out.println("KLASA OKZ: " + sveRezervacije);
+                        odgovor.setOdgovor(sveRezervacije);
                         break;
                     default:
                         System.out.println("NIJE UNETA VALIDNA OPERACIJA!!!");

@@ -8,6 +8,7 @@ import domen.OrganizatorLova;
 import forme.DodajNovogOrganizatoraForm;
 import forme.LoginForm;
 import forme.MainForm;
+import forme.PrikazRezervacijaForm;
 import forme.PrikazSvihOrganizatoraForm;
 import forme.mod.FormaMod;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import java.util.Map;
 import kontorleri.DodajNovogOrganizatoraKontroler;
 import kontorleri.LoginKontorler;
 import kontorleri.MainFormKontroler;
+import kontorleri.PrikazRezervacijaKontroler;
 import kontorleri.PrikazSvihOrganizatoraKontroler;
 
 /**
@@ -31,6 +33,8 @@ public class Kordinator {
     private MainFormKontroler mainFormKontorler;
     private PrikazSvihOrganizatoraKontroler psoKontorler;
     private DodajNovogOrganizatoraKontroler dnoKontroler;
+
+    private PrikazRezervacijaKontroler prKontroler;
 
     private static Kordinator instanca;
 
@@ -68,6 +72,11 @@ public class Kordinator {
     public void otvoriIzmeniOrganizatoraFormu() {
         dnoKontroler = new DodajNovogOrganizatoraKontroler(new DodajNovogOrganizatoraForm());
         dnoKontroler.otvoriFormu(FormaMod.IZMENI);
+    }
+
+    public void otvoriPrikazSvihRezervacijaFormu() {
+        prKontroler = new PrikazRezervacijaKontroler(new PrikazRezervacijaForm());
+        prKontroler.otvoriFormu();
     }
 
     public void osveziFormu() {

@@ -124,7 +124,7 @@ public class RezervacijaLova implements ApstraktniDomenskiObjekat {
 
     @Override
     public String toString() {
-        return "RezervacijaLova{" + "idRezervacijaLovaa=" + idRezervacijaLova + ", datumRezervacije=" + datumRezervacije + ", sezona=" + sezona + ", iznosRezervacije=" + iznosRezervacije + ", organizatorLova=" + organizatorLova + ", lovackaGrupa=" + lovackaGrupa + ", opstina=" + opstina + ", stavke=" + stavke + '}';
+        return "RezervacijaLova{" + "idRezervacijaLova=" + idRezervacijaLova + ", datumRezervacije=" + datumRezervacije + ", sezona=" + sezona + ", iznosRezervacije=" + iznosRezervacije + ", organizatorLova=" + organizatorLova + ", lovackaGrupa=" + lovackaGrupa + ", opstina=" + opstina + ", stavke=" + stavke + '}';
     }
 
     @Override
@@ -157,7 +157,35 @@ public class RezervacijaLova implements ApstraktniDomenskiObjekat {
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+        while (rs.next()) {
+            int idOpstina = rs.getInt("opstina.idOpstina");
+            String naziv = rs.getString("opstina.naziv");
+            Opstina opstina = new Opstina(idOpstina, naziv);
+
+            int idOrganizator = rs.getInt("organizatorlova.idOrganizator");
+            String ime = rs.getString("organizatorlova.ime");
+            String prezime = rs.getString("organizatorlova.prezime");
+            String email = rs.getString("organizatorlova.email");
+            String username = rs.getString("organizatorlova.username");
+            String password = rs.getString("organizatorlova.password");
+            OrganizatorLova ol = new OrganizatorLova(idOrganizator, ime, prezime, email, opstina, username, password);
+
+            int idLovackaGrupa = rs.getInt("lovackagrupa.idLovackaGrupa");
+            String imeGrupe = rs.getString("lovackagrupa.imeGrupe");
+            LovackaGrupa lovackaGrupa = new LovackaGrupa(idLovackaGrupa, imeGrupe, idOpstina);
+
+            int idRezervacijaLova = rs.getInt("rezervacijalova.idRezervacijaLova");
+            Date datumRezervacije = rs.getDate("rezervacijalova.datumRezervacije");
+            Sezona sezona = Sezona.valueOf(rs.getString("rezervacijalova.sezona"));
+            double iznosRezervacije = rs.getDouble("rezervacijalova.iznosRezervacije");
+
+            RezervacijaLova rezervacijaLova = new RezervacijaLova(idRezervacijaLova, datumRezervacije, sezona,
+                    iznosRezervacije, ol, lovackaGrupa, opstina);
+            lista.add(rezervacijaLova);
+        }
+
+        return lista;
     }
 
     @Override

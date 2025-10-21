@@ -9,8 +9,8 @@ package domen;
  * @author Dzaja
  */
 public enum Sezona {
-    PROLECE,
-    LETO,
-    JESEN,
-    ZIMA
+    Prolece,
+    Leto,
+    Jesen,
+    Zima
 }
