@@ -18,5 +18,6 @@ public enum Operacija implements Serializable {
     DODAJ_NOVOG_ORGANIZATORA,
     AZURIRAJ_ORGANIZATORA,
     UCITAJ_REZERVACIJE,
+    UCITAJ_STAVKE,
 
 }

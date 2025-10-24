@@ -4,6 +4,7 @@
  */
 package forme;
 
+import java.awt.event.MouseAdapter;
 import javax.swing.JTable;
 
 /**
@@ -34,7 +35,7 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
         btnObrisi = new javax.swing.JButton();
         btnAzuriraj = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblRezervacije1 = new javax.swing.JTable();
+        tblRezervacije = new javax.swing.JTable();
         btnObrisiStavku = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,7 +57,7 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
 
         btnAzuriraj.setText("AZURIRAJ");
 
-        tblRezervacije1.setModel(new javax.swing.table.DefaultTableModel(
+        tblRezervacije.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -67,7 +68,7 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tblRezervacije1);
+        jScrollPane2.setViewportView(tblRezervacije);
 
         btnObrisiStavku.setText("OBRISI STAVKU");
 
@@ -76,7 +77,7 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(200, Short.MAX_VALUE)
+                .addContainerGap(389, Short.MAX_VALUE)
                 .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(btnAzuriraj, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -84,17 +85,17 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(306, 306, 306)
-                        .addComponent(btnObrisiStavku, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnObrisiStavku, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 889, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(74, 74, 74)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(91, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(95, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,6 +120,10 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public JTable getTblRezervacije() {
+        return tblRezervacije;
+    }
+
+    public JTable getTblStavke() {
         return tblStavke;
     }
 
@@ -129,7 +134,11 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
     private javax.swing.JButton btnObrisiStavku;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblRezervacije1;
+    private javax.swing.JTable tblRezervacije;
     private javax.swing.JTable tblStavke;
     // End of variables declaration//GEN-END:variables
+
+    public void stavkeAddMouseListener(MouseAdapter mouseAdapter) {
+        tblRezervacije.addMouseListener(mouseAdapter);
+    }
 }

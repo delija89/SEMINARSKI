@@ -48,19 +48,19 @@ public class ModelTabeleRezervacija extends AbstractTableModel {
         RezervacijaLova rezervacijaLova = lista.get(rowIndex);
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         switch (columnIndex) {
-            case 1:
+            case 0:
                 return rezervacijaLova.getIdRezervacijaLova();
-            case 2:
+            case 1:
                 return sdf.format(rezervacijaLova.getDatumRezervacije());
-            case 3:
+            case 2:
                 return rezervacijaLova.getSezona();
-            case 4:
+            case 3:
                 return rezervacijaLova.getIznosRezervacije();
-            case 5:
+            case 4:
                 return rezervacijaLova.getOrganizatorLova().getIme();
-            case 6:
+            case 5:
                 return rezervacijaLova.getLovackaGrupa().getImeGrupe();
-            case 7:
+            case 6:
                 return rezervacijaLova.getOpstina().getNazivOpstina();
             default:
                 return "N/A";

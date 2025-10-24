@@ -7,6 +7,7 @@ package kontroler;
 import domen.Opstina;
 import domen.OrganizatorLova;
 import domen.RezervacijaLova;
+import domen.StavkaRezervacijeLova;
 import java.util.List;
 import operacije.Opstina.UcitajSveOpstine;
 import operacije.Organizator.AzurirajOrganizatora;
@@ -14,6 +15,7 @@ import operacije.Organizator.KreirajNovogOrganizatora;
 import operacije.Organizator.ObrisiOrganizatoraLova;
 import operacije.login.LoginOperacija;
 import operacije.Organizator.UcitajOrganizatoreLova;
+import operacije.Rezervacija.Stavke.UcitajStavke;
 import operacije.Rezervacija.UcitajRezervacije;
 
 /**
@@ -75,5 +77,12 @@ public class Kontroler {
         operacija.izvrsi(null, null); //setovace listu
         System.out.println("KONTORLER JE DOBIO SVE REZERVACIJE: " + operacija.getListaRezervacija());
         return operacija.getListaRezervacija();
+    }
+
+    public List<StavkaRezervacijeLova> ucitajStavke(int id) throws Exception {
+        UcitajStavke operacija = new UcitajStavke();
+        operacija.izvrsi(id, null);
+        System.out.println("KONTORLER JE DOBIO STAVKE: " + operacija.getStavke());
+        return operacija.getStavke();
     }
 }

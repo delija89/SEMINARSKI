@@ -5,6 +5,8 @@
 package domen;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,7 +43,6 @@ public class StavkaRezervacijeLova implements ApstraktniDomenskiObjekat {
     public void setRezervacijaLova(RezervacijaLova rezervacijaLova) {
         this.rezervacijaLova = rezervacijaLova;
     }
-
 
     public int getRb() {
         return rb;
@@ -128,7 +129,7 @@ public class StavkaRezervacijeLova implements ApstraktniDomenskiObjekat {
     }
 
     @Override
-    public String vratiVrednostZaUbacivanje() { 
+    public String vratiVrednostZaUbacivanje() {
         return rb + ", '" + uslovi + "', " + brojDana + ", " + cena + ", " + iznos + ", " + vrstaLova.getIdVrstaLova();
     }
 
@@ -145,7 +146,34 @@ public class StavkaRezervacijeLova implements ApstraktniDomenskiObjekat {
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+        while (rs.next()) {
+            int idRezervacijaLova = rs.getInt("stavkarezervacijelova.idRezervacijaLova");
+            RezervacijaLova rezervacijaLova1 = new RezervacijaLova();
+            rezervacijaLova1.setIdRezervacijaLova(idRezervacijaLova);
+
+            int idVrstaLova = rs.getInt("vrstalova.idVrstaLova");
+            String naziv = rs.getString("vrstalova.naziv");
+            TIpDivljaci tipDivljaci = TIpDivljaci.valueOf(rs.getString("vrstalova.tipDivljaci"));
+            double cenaPoDanu = rs.getDouble("vrstalova.cenaPoDanu");
+            VrstaLova vl1 = new VrstaLova();
+            vl1.setIdVrstaLova(idVrstaLova);
+            vl1.setNaziv(naziv);
+            vl1.settIpDivljaci(tipDivljaci);
+            vl1.setCenaPoDanu(cenaPoDanu);
+
+            int rb = rs.getInt("stavkarezervacijelova.rb");
+            String uslovi = rs.getString("stavkarezervacijelova.uslovi");
+            int brojDana = rs.getInt("stavkarezervacijelova.brojDana");
+            double cena = rs.getDouble("stavkarezervacijelova.cena");
+            double iznos = rs.getDouble("stavkarezervacijelova.iznos");
+
+            StavkaRezervacijeLova stavkaRezervacijeLova = new StavkaRezervacijeLova(rezervacijaLova1, rb, uslovi,
+                    brojDana, cena, vl1, iznos);
+
+            lista.add(stavkaRezervacijeLova);
+        }
+        return lista;
     }
 
     @Override

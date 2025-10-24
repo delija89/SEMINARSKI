@@ -7,6 +7,7 @@ package komunikacija;
 import domen.Opstina;
 import domen.OrganizatorLova;
 import domen.RezervacijaLova;
+import domen.StavkaRezervacijeLova;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -134,4 +135,16 @@ public class Komunikacija {
         sveRezervacije = (List<RezervacijaLova>) odg.getOdgovor();
         return sveRezervacije;
     }
+
+    public List<StavkaRezervacijeLova> ucitajStavke(int idRezervacijaLova) {
+        List<StavkaRezervacijeLova> stavke = new ArrayList<>();
+        Zahtev z = new Zahtev(Operacija.UCITAJ_STAVKE, idRezervacijaLova);
+
+        posiljaoc.posalji(z);
+
+        Odgovor odg = (Odgovor) primalac.primi();
+        stavke = (List<StavkaRezervacijeLova>) odg.getOdgovor();
+        return stavke;
+    }
+
 }
