@@ -4,11 +4,13 @@
  */
 package kontroler;
 
+import domen.LovackaGrupa;
 import domen.Opstina;
 import domen.OrganizatorLova;
 import domen.RezervacijaLova;
 import domen.StavkaRezervacijeLova;
 import java.util.List;
+import operacije.LovackaGrupa.UcitajLovackeGrupe;
 import operacije.Opstina.UcitajSveOpstine;
 import operacije.Organizator.AzurirajOrganizatora;
 import operacije.Organizator.KreirajNovogOrganizatora;
@@ -84,5 +86,12 @@ public class Kontroler {
         operacija.izvrsi(id, null);
         System.out.println("KONTORLER JE DOBIO STAVKE: " + operacija.getStavke());
         return operacija.getStavke();
+    }
+
+    public List<LovackaGrupa> ucitajLovackeGrupe() throws Exception {
+        UcitajLovackeGrupe operacija = new UcitajLovackeGrupe();
+        operacija.izvrsi(null, null);
+        System.out.println("KONTORLER JE DOBIO GRUPE: " + operacija.getListaGrupa());
+        return operacija.getListaGrupa();
     }
 }

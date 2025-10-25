@@ -4,6 +4,7 @@
  */
 package komunikacija;
 
+import domen.LovackaGrupa;
 import domen.Opstina;
 import domen.OrganizatorLova;
 import domen.RezervacijaLova;
@@ -145,6 +146,17 @@ public class Komunikacija {
         Odgovor odg = (Odgovor) primalac.primi();
         stavke = (List<StavkaRezervacijeLova>) odg.getOdgovor();
         return stavke;
+    }
+
+    public List<LovackaGrupa> ucitajLovackeGrupe() {
+        List<LovackaGrupa> grupe = new ArrayList<>();
+        Zahtev z = new Zahtev(Operacija.UCITAJ_LOVACKE_GRUPE, null);
+
+        posiljaoc.posalji(z);
+
+        Odgovor odg = (Odgovor) primalac.primi();
+        grupe = (List<LovackaGrupa>) odg.getOdgovor();
+        return grupe;
     }
 
 }

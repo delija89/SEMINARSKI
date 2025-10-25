@@ -4,6 +4,7 @@
  */
 package niti;
 
+import domen.LovackaGrupa;
 import domen.Opstina;
 import domen.OrganizatorLova;
 import domen.RezervacijaLova;
@@ -92,6 +93,12 @@ public class ObradaKlijentskihZahteva extends Thread {
                         List<StavkaRezervacijeLova> stavke = Kontroler.getInstance().ucitajStavke((int) zahtev.getParametar());
                         System.out.println("KLASA OKZ: " + stavke);
                         odgovor.setOdgovor(stavke);
+                        break;
+                        
+                    case UCITAJ_LOVACKE_GRUPE:
+                        List<LovackaGrupa> grupe = Kontroler.getInstance().ucitajLovackeGrupe();
+                        System.out.println("KLASA OKZ: " + grupe);
+                        odgovor.setOdgovor(grupe);
                         break;
                     default:
                         System.out.println("NIJE UNETA VALIDNA OPERACIJA!!!");

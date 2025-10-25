@@ -6,6 +6,7 @@ package koridnator;
 
 import domen.OrganizatorLova;
 import forme.DodajNovogOrganizatoraForm;
+import forme.DodajNovuRezervacijuForm;
 import forme.LoginForm;
 import forme.MainForm;
 import forme.PrikazRezervacijaForm;
@@ -14,6 +15,7 @@ import forme.mod.FormaMod;
 import java.util.HashMap;
 import java.util.Map;
 import kontorleri.DodajNovogOrganizatoraKontroler;
+import kontorleri.DodajRezervacijuKontoler;
 import kontorleri.LoginKontorler;
 import kontorleri.MainFormKontroler;
 import kontorleri.PrikazRezervacijaKontroler;
@@ -33,70 +35,76 @@ public class Kordinator {
     private MainFormKontroler mainFormKontorler;
     private PrikazSvihOrganizatoraKontroler psoKontorler;
     private DodajNovogOrganizatoraKontroler dnoKontroler;
-
+    
     private PrikazRezervacijaKontroler prKontroler;
-
+    private DodajRezervacijuKontoler drKontroler;
+    
     private static Kordinator instanca;
-
+    
     private Kordinator() {
         parametri = new HashMap<>();
     }
-
+    
     public static Kordinator getInstanca() {
         if (instanca == null) {
             instanca = new Kordinator();
         }
         return instanca;
     }
-
+    
     public void otvoriLoginForm() {
         loginKontorler = new LoginKontorler(new LoginForm());//pravimo kontrolera za login formu ali i samu formu otvaramo
         loginKontorler.otvoriFormu(); //samo saljemo kontroleru da otvori formu
     }
-
+    
     public void otvoriMainFormu() {
         mainFormKontorler = new MainFormKontroler(new MainForm());
         mainFormKontorler.otvoriFormu();
     }
-
+    
     public void otvoriPrikazSvihOrganizatoraFormu() {
         psoKontorler = new PrikazSvihOrganizatoraKontroler(new PrikazSvihOrganizatoraForm());
         psoKontorler.otvoriFormu();
     }
-
+    
     public void otvoriDodajNovogOrganizatoraFormu() {
         dnoKontroler = new DodajNovogOrganizatoraKontroler(new DodajNovogOrganizatoraForm());
         dnoKontroler.otvoriFormu(FormaMod.DODAJ);
     }
-
+    
     public void otvoriIzmeniOrganizatoraFormu() {
         dnoKontroler = new DodajNovogOrganizatoraKontroler(new DodajNovogOrganizatoraForm());
         dnoKontroler.otvoriFormu(FormaMod.IZMENI);
     }
-
+    
     public void otvoriPrikazSvihRezervacijaFormu() {
         prKontroler = new PrikazRezervacijaKontroler(new PrikazRezervacijaForm());
         prKontroler.otvoriFormu();
     }
-
+    
+    public void otvoriDodajNovuRezervacijuFormu() {
+        drKontroler = new DodajRezervacijuKontoler(new DodajNovuRezervacijuForm());
+        drKontroler.otvoriFormu(FormaMod.DODAJ);
+    }
+    
     public void osveziFormu() {
         psoKontorler.osveziFormu();
     }
-
+    
     public OrganizatorLova getUlogovani() {
         return ulogovani;
     }
-
+    
     public void setUlogovani(OrganizatorLova ulogovani) {
         this.ulogovani = ulogovani;
     }
-
+    
     public void dodajParam(String s, Object o) {
         parametri.put(s, o);
     }
-
+    
     public Object vratiParam(String s) {
         return parametri.get(s);
     }
-
+    
 }

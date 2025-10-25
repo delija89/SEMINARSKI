@@ -81,7 +81,7 @@ public class LovackaGrupa implements ApstraktniDomenskiObjekat {
 
     @Override
     public String toString() {
-        return "LovackaGrupa{" + "idLovackaGrupa=" + idLovackaGrupa + ", imeGrupe=" + imeGrupe + ", brojClanova=" + brojClanova + '}';
+        return imeGrupe;
     }
 
     @Override
