@@ -9,6 +9,7 @@ import domen.Opstina;
 import domen.OrganizatorLova;
 import domen.RezervacijaLova;
 import domen.StavkaRezervacijeLova;
+import domen.VrstaLova;
 import java.util.List;
 import operacije.LovackaGrupa.UcitajLovackeGrupe;
 import operacije.Opstina.UcitajSveOpstine;
@@ -19,6 +20,7 @@ import operacije.login.LoginOperacija;
 import operacije.Organizator.UcitajOrganizatoreLova;
 import operacije.Rezervacija.Stavke.UcitajStavke;
 import operacije.Rezervacija.UcitajRezervacije;
+import operacije.VrstaLova.UcitajVrsteLova;
 
 /**
  *
@@ -93,5 +95,12 @@ public class Kontroler {
         operacija.izvrsi(null, null);
         System.out.println("KONTORLER JE DOBIO GRUPE: " + operacija.getListaGrupa());
         return operacija.getListaGrupa();
+    }
+
+    public List<VrstaLova> ucitajVrsteLova() throws Exception {
+        UcitajVrsteLova operacija = new UcitajVrsteLova();
+        operacija.izvrsi(null, null);
+        System.out.println("KONTORLER JE DOBIO VRSTE LOVA: " + operacija.getVrste());
+        return operacija.getVrste();
     }
 }

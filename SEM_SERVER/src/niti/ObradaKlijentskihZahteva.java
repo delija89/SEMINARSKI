@@ -9,12 +9,14 @@ import domen.Opstina;
 import domen.OrganizatorLova;
 import domen.RezervacijaLova;
 import domen.StavkaRezervacijeLova;
+import domen.VrstaLova;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import komunikacija.Odgovor;
+import static komunikacija.Operacija.UCITAJ_VRSTE_LOVA;
 import komunikacija.Posiljaoc;
 import komunikacija.Primalac;
 import komunikacija.Zahtev;
@@ -94,14 +96,20 @@ public class ObradaKlijentskihZahteva extends Thread {
                         System.out.println("KLASA OKZ: " + stavke);
                         odgovor.setOdgovor(stavke);
                         break;
-                        
+
                     case UCITAJ_LOVACKE_GRUPE:
                         List<LovackaGrupa> grupe = Kontroler.getInstance().ucitajLovackeGrupe();
                         System.out.println("KLASA OKZ: " + grupe);
                         odgovor.setOdgovor(grupe);
                         break;
+                    case UCITAJ_VRSTE_LOVA:
+                        List<VrstaLova> vrste = Kontroler.getInstance().ucitajVrsteLova();
+                        System.out.println("KLASA OKZ: " + vrste);
+                        odgovor.setOdgovor(vrste);
+                        break;
                     default:
                         System.out.println("NIJE UNETA VALIDNA OPERACIJA!!!");
+
                 }
                 System.out.println("KLASA OBRADAKLZAHTEVA: " + odgovor.getOdgovor());
                 posiljaoc.posalji(odgovor);

@@ -9,6 +9,7 @@ import domen.Opstina;
 import domen.OrganizatorLova;
 import domen.RezervacijaLova;
 import domen.Sezona;
+import domen.VrstaLova;
 import forme.DodajNovuRezervacijuForm;
 import forme.mod.FormaMod;
 import java.util.List;
@@ -37,14 +38,17 @@ public class DodajRezervacijuKontoler {
         List<OrganizatorLova> organizatori = komunikacija.Komunikacija.getInstance().ucitajOrganizatore();
         List<LovackaGrupa> grupe = komunikacija.Komunikacija.getInstance().ucitajLovackeGrupe();
         List<Opstina> opstine = komunikacija.Komunikacija.getInstance().ucitajSveOpstine();
+        List<VrstaLova> vrsta = komunikacija.Komunikacija.getInstance().ucitajVrsteLova();
 
         dnrForm.getCmbOrganizatori().removeAllItems();
         dnrForm.getCmbLovackeGrupe().removeAllItems();
         dnrForm.getCmbOpstine().removeAllItems();
+        dnrForm.getCmbVrstaLova().removeAllItems();
 
         organizatori.forEach(o -> dnrForm.getCmbOrganizatori().addItem(o));
         grupe.forEach(g -> dnrForm.getCmbLovackeGrupe().addItem(g));
         opstine.forEach(op -> dnrForm.getCmbOpstine().addItem(op));
+        vrsta.forEach(vl -> dnrForm.getCmbVrstaLova().addItem(vl));
 
         for (Sezona s : Sezona.values()) {
             dnrForm.getCmbSezona().addItem(s);  //POPUNJAVANJE SEZONA IZ ENUMA

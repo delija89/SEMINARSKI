@@ -9,6 +9,7 @@ import domen.Opstina;
 import domen.OrganizatorLova;
 import domen.RezervacijaLova;
 import domen.StavkaRezervacijeLova;
+import domen.VrstaLova;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -157,6 +158,17 @@ public class Komunikacija {
         Odgovor odg = (Odgovor) primalac.primi();
         grupe = (List<LovackaGrupa>) odg.getOdgovor();
         return grupe;
+    }
+
+    public List<VrstaLova> ucitajVrsteLova() {
+        List<VrstaLova> vrste = new ArrayList<>();
+        Zahtev z = new Zahtev(Operacija.UCITAJ_VRSTE_LOVA, null);
+
+        posiljaoc.posalji(z);
+
+        Odgovor odg = (Odgovor) primalac.primi();
+        vrste = (List<VrstaLova>) odg.getOdgovor();
+        return vrste;
     }
 
 }

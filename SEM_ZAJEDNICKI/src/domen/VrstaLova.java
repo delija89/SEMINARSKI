@@ -78,7 +78,7 @@ public class VrstaLova implements ApstraktniDomenskiObjekat {
 
     @Override
     public String toString() {
-        return "VrstaLova{" + "idVrstaLova=" + idVrstaLova + ", naziv=" + naziv + ", tIpDivljaci=" + tIpDivljaci + ", cenaPoDanu=" + cenaPoDanu + '}';
+        return naziv;
     }
 
     @Override

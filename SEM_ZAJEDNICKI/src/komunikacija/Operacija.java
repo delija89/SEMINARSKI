@@ -20,5 +20,6 @@ public enum Operacija implements Serializable {
     UCITAJ_REZERVACIJE,
     UCITAJ_STAVKE,
     UCITAJ_LOVACKE_GRUPE,
+    UCITAJ_VRSTE_LOVA,
 
 }
