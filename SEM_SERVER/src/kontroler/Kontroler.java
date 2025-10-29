@@ -18,6 +18,7 @@ import operacije.Organizator.KreirajNovogOrganizatora;
 import operacije.Organizator.ObrisiOrganizatoraLova;
 import operacije.login.LoginOperacija;
 import operacije.Organizator.UcitajOrganizatoreLova;
+import operacije.Rezervacija.DodajRezervaciju;
 import operacije.Rezervacija.Stavke.UcitajStavke;
 import operacije.Rezervacija.UcitajRezervacije;
 import operacije.VrstaLova.UcitajVrsteLova;
@@ -102,5 +103,10 @@ public class Kontroler {
         operacija.izvrsi(null, null);
         System.out.println("KONTORLER JE DOBIO VRSTE LOVA: " + operacija.getVrste());
         return operacija.getVrste();
+    }
+
+    public void dodajRezervaciju(RezervacijaLova rezervacijaLova) throws Exception {
+        DodajRezervaciju operacija = new DodajRezervaciju();
+        operacija.izvrsi(rezervacijaLova, null);
     }
 }

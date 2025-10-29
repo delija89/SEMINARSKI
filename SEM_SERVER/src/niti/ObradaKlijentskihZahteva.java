@@ -27,23 +27,23 @@ import kontroler.Kontroler;
  * @author Dzaja
  */
 public class ObradaKlijentskihZahteva extends Thread {
-
+    
     Socket s;
     Posiljaoc posiljaoc;
     Primalac primalac;
     boolean kraj = false;
-
+    
     public ObradaKlijentskihZahteva(Socket s) {
         this.s = s;
         posiljaoc = new Posiljaoc(s);
         primalac = new Primalac(s);
     }
-
+    
     @Override
     public void run() {
         try {
             while (!kraj) {
-
+                
                 Zahtev zahtev = (Zahtev) primalac.primi();
                 if (zahtev == null) {
                     return;
@@ -85,7 +85,7 @@ public class ObradaKlijentskihZahteva extends Thread {
                         Kontroler.getInstance().azurirajOrganizatora(ol3);
                         odgovor.setOdgovor(null);
                         break;
-
+                    
                     case UCITAJ_REZERVACIJE:
                         List<RezervacijaLova> sveRezervacije = Kontroler.getInstance().ucitajRezervacije();
                         System.out.println("KLASA OKZ: " + sveRezervacije);
@@ -96,7 +96,7 @@ public class ObradaKlijentskihZahteva extends Thread {
                         System.out.println("KLASA OKZ: " + stavke);
                         odgovor.setOdgovor(stavke);
                         break;
-
+                    
                     case UCITAJ_LOVACKE_GRUPE:
                         List<LovackaGrupa> grupe = Kontroler.getInstance().ucitajLovackeGrupe();
                         System.out.println("KLASA OKZ: " + grupe);
@@ -107,9 +107,18 @@ public class ObradaKlijentskihZahteva extends Thread {
                         System.out.println("KLASA OKZ: " + vrste);
                         odgovor.setOdgovor(vrste);
                         break;
+                    
+                    case DODAJ_REZERVACIJU_LOVA:
+                        try {
+                            Kontroler.getInstance().dodajRezervaciju((RezervacijaLova) zahtev.getParametar());
+                            odgovor.setOdgovor(null);
+                        } catch (Exception ex) {
+                            odgovor.setOdgovor(ex);
+                        }
+                        break;
                     default:
                         System.out.println("NIJE UNETA VALIDNA OPERACIJA!!!");
-
+                    
                 }
                 System.out.println("KLASA OBRADAKLZAHTEVA: " + odgovor.getOdgovor());
                 posiljaoc.posalji(odgovor);
@@ -121,13 +130,13 @@ public class ObradaKlijentskihZahteva extends Thread {
             try {
                 s.close();
                 System.out.println("Zatvorena konekcija sa klijentom.");
-
+                
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
+    
     public void prekiniNit() {
         kraj = true;
         try {
@@ -137,5 +146,5 @@ public class ObradaKlijentskihZahteva extends Thread {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
 }

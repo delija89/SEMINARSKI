@@ -5,8 +5,10 @@
 package koridnator;
 
 import domen.OrganizatorLova;
+import domen.StavkaRezervacijeLova;
 import forme.DodajNovogOrganizatoraForm;
 import forme.DodajNovuRezervacijuForm;
+import forme.DodajStavkuRezervacijeForm;
 import forme.LoginForm;
 import forme.MainForm;
 import forme.PrikazRezervacijaForm;
@@ -16,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import kontorleri.DodajNovogOrganizatoraKontroler;
 import kontorleri.DodajRezervacijuKontoler;
+import kontorleri.DodajStavkuRezervacijeKontroler;
 import kontorleri.LoginKontorler;
 import kontorleri.MainFormKontroler;
 import kontorleri.PrikazRezervacijaKontroler;
@@ -38,6 +41,7 @@ public class Kordinator {
     
     private PrikazRezervacijaKontroler prKontroler;
     private DodajRezervacijuKontoler drKontroler;
+    private DodajStavkuRezervacijeKontroler dsrKontroler;
     
     private static Kordinator instanca;
     
@@ -87,6 +91,16 @@ public class Kordinator {
         drKontroler.otvoriFormu(FormaMod.DODAJ);
     }
     
+    public void otvoriDodajStavkuRezervacijeFormu(){
+        dsrKontroler = new DodajStavkuRezervacijeKontroler(new DodajStavkuRezervacijeForm());
+        dsrKontroler.otvoriFormu(FormaMod.DODAJ);
+    }
+    
+    public void dodajUListuDodatih(StavkaRezervacijeLova stavka) {
+        drKontroler.getStavke().add(stavka);
+        drKontroler.osveziTabeluStavki();
+    }
+    
     public void osveziFormu() {
         psoKontorler.osveziFormu();
     }
@@ -106,5 +120,7 @@ public class Kordinator {
     public Object vratiParam(String s) {
         return parametri.get(s);
     }
+
+    
     
 }

@@ -5,6 +5,7 @@
 package domen;
 
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -139,7 +140,9 @@ public class RezervacijaLova implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostZaUbacivanje() {
-        return "'" + datumRezervacije + "', '" + sezona.toString() + "', " + iznosRezervacije + ", "
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String datumString = sdf.format(datumRezervacije);
+        return "'" + datumString + "', '" + sezona.toString() + "', " + iznosRezervacije + ", "
                 + organizatorLova.getIdOrganizator() + ", " + lovackaGrupa.getIdLovackaGrupa() + ", " + opstina.getIdOpstina();
     }
 

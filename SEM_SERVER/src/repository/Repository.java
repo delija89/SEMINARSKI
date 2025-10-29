@@ -22,4 +22,6 @@ public interface Repository<T> { //sve operacije CRUD, potpisi. Odnosti se na od
 
     List<T> getAll(); //vraca sve objekte, T je genericki ali moze biti bilo koja klasa
 
+    int vratiId(T param) throws Exception;
+
 }

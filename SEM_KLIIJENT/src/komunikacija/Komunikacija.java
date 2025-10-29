@@ -171,4 +171,15 @@ public class Komunikacija {
         return vrste;
     }
 
+    public void dodajRezervaciju(RezervacijaLova rez) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacija.DODAJ_REZERVACIJU_LOVA, rez);
+        posiljaoc.posalji(zahtev);
+        Odgovor odg = (Odgovor) primalac.primi();
+        if (odg.getOdgovor() == null) {
+            System.out.println("USPEH");
+        } else {
+            throw (Exception) odg.getOdgovor();
+        }
+    }
+
 }
