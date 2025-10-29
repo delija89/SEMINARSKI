@@ -9,10 +9,13 @@ import domen.StavkaRezervacijeLova;
 import forme.PrikazRezervacijaForm;
 import forme.modeli.ModelTabeleRezervacija;
 import forme.modeli.ModelTabeleStavkaRezervacije;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,6 +45,38 @@ public class PrikazRezervacijaKontroler {
                 }
             }
         });
+
+        prForm.ObrisiAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int red = prForm.getTblRezervacije().getSelectedRow();
+                if (red == -1) {
+                    JOptionPane.showMessageDialog(null, "Niste odabrali rezervaciju za brisanje!");
+                    return;
+                }
+
+                int potvrda = JOptionPane.showConfirmDialog(
+                        null,
+                        "Da li ste sigurni da želite da obrišete izabranu rezervaciju?",
+                        "Potvrda",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (potvrda == JOptionPane.YES_OPTION) {
+                    ModelTabeleRezervacija mtr = (ModelTabeleRezervacija) prForm.getTblRezervacije().getModel();
+                    RezervacijaLova rez = mtr.getLista().get(red);
+
+                    try {
+                        komunikacija.Komunikacija.getInstance().obrisiRezervaciju(rez);
+                        JOptionPane.showMessageDialog(null, "Sistem je obrisao rezervaciju lova!");
+                        osveziFormu();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Sistem ne moze da obrise rezervaciju lova!");
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     public void otvoriFormu() {
@@ -66,7 +101,7 @@ public class PrikazRezervacijaKontroler {
 
     public void osveziFormu() {
         ucitajRezervacije();
-        //ucitajStavkeRezervacija();
+        ucitajStavkeRezervacija();
     }
 
 }

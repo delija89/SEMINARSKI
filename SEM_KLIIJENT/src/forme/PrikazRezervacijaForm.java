@@ -4,6 +4,7 @@
  */
 package forme;
 
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import javax.swing.JTable;
 
@@ -139,5 +140,9 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
 
     public void stavkeAddMouseListener(MouseAdapter mouseAdapter) {
         tblRezervacije.addMouseListener(mouseAdapter);
+    }
+
+    public void ObrisiAddActionListener(ActionListener actionListener) {
+        btnObrisi.addActionListener(actionListener);
     }
 }

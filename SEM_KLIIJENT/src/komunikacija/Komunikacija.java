@@ -176,7 +176,18 @@ public class Komunikacija {
         posiljaoc.posalji(zahtev);
         Odgovor odg = (Odgovor) primalac.primi();
         if (odg.getOdgovor() == null) {
-            System.out.println("USPEH");
+            System.out.println("DODAVANJE REZERVACIJE JE USPESNO");
+        } else {
+            throw (Exception) odg.getOdgovor();
+        }
+    }
+
+    public void obrisiRezervaciju(RezervacijaLova rez) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacija.OBRISI_REZERVACIJU, rez);
+        posiljaoc.posalji(zahtev);
+        Odgovor odg = (Odgovor) primalac.primi();
+        if (odg.getOdgovor() == null) {
+            System.out.println("BRISANJE REZERVACIJE JE USPESNO");
         } else {
             throw (Exception) odg.getOdgovor();
         }
