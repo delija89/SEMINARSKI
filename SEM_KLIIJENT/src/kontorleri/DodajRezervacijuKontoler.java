@@ -20,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import koridnator.Kordinator;
 
@@ -43,8 +45,13 @@ public class DodajRezervacijuKontoler {
     }
 
     public void otvoriFormu(FormaMod mod) {
-        this.rezervacijaLova = new RezervacijaLova();
-        this.rezervacijaLova.setStavke(new ArrayList<>());
+        if (mod.equals(FormaMod.DODAJ)) {
+            this.rezervacijaLova = new RezervacijaLova();
+            this.rezervacijaLova.setStavke(new ArrayList<>());
+        } else {
+            this.rezervacijaLova = (RezervacijaLova) Kordinator.getInstanca().vratiParam("rezervacijaLova");
+            popuniFormuSaPodacima();
+        }
         Kordinator.getInstanca().dodajParam("rezervacijaLova", this.rezervacijaLova);
         pripremiFormu(mod);
         dnrForm.setLocationRelativeTo(null);
@@ -72,8 +79,6 @@ public class DodajRezervacijuKontoler {
             dnrForm.getBtnIzmeniRez().setVisible(false);
             dnrForm.getBtnDodajRez().setVisible(true);
         } else {
-            // mod izmena – popuni polja sa postojećim podacima
-            //RezervacijaLova rezervacija = (RezervacijaLova) Kordinator.getInstanca().vratiParam("rezervacijalova");
             //popuniFormuSaPodacima();
         }
     }
@@ -107,9 +112,6 @@ public class DodajRezervacijuKontoler {
                 rezervacijaLova = new RezervacijaLova(-1, datumRezervacije, sezona, iznosRezervacije,
                         organizatorLova, lovackaGrupa, opstina);
 
-                //StavkaRezervacijeLova s = new StavkaRezervacijeLova(rez, 0, null, 0, 0, null, 0);
-                //List<StavkaRezervacijeLova> stavke1 = new ArrayList<>();
-                //stavke1.add(s);
                 rezervacijaLova.setStavke(stavke);
 
                 try {
@@ -118,6 +120,39 @@ public class DodajRezervacijuKontoler {
                     dnrForm.dispose();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Sistem ne može da zapamti rezervaciju.");
+                }
+            }
+        });
+
+        dnrForm.izmeniAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                    rezervacijaLova.setDatumRezervacije(sdf.parse(dnrForm.getTxtDatum().getText().strip()));
+                    rezervacijaLova.setSezona((Sezona) dnrForm.getCmbSezona().getSelectedItem());
+                    rezervacijaLova.setOrganizatorLova((OrganizatorLova) dnrForm.getCmbOrganizatori().getSelectedItem());
+                    rezervacijaLova.setLovackaGrupa((LovackaGrupa) dnrForm.getCmbLovackeGrupe().getSelectedItem());
+                    rezervacijaLova.setOpstina((Opstina) dnrForm.getCmbOpstine().getSelectedItem());
+
+                    double sumaStavki = 0;
+                    for (StavkaRezervacijeLova stavkaRezervacijeLova : rezervacijaLova.getStavke()) {
+                        sumaStavki += stavkaRezervacijeLova.getIznos();
+                    }
+                    double iznosRezervacije = sumaStavki * rezervacijaLova.getLovackaGrupa().getBrojClanova();
+                    rezervacijaLova.setIznosRezervacije(iznosRezervacije);
+
+                    try {
+                        komunikacija.Komunikacija.getInstance().izmeniRezervaciju(rezervacijaLova);
+                    } catch (Exception ex) {
+                        Logger.getLogger(DodajRezervacijuKontoler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    JOptionPane.showMessageDialog(null, "Sistem je izmenio rezervaciju lova.");
+                    dnrForm.dispose();
+                    Kordinator.getInstanca().getPrKontroler().osveziFormu();
+                } catch (ParseException ex) {
+                    JOptionPane.showMessageDialog(null, "Sistem ne moze da izmeni rezervaciju!");
+                    ex.printStackTrace();
                 }
             }
         });
@@ -134,11 +169,23 @@ public class DodajRezervacijuKontoler {
     }
 
     private void popuniFormuSaPodacima() {
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        dnrForm.getTxtDatum().setText(new SimpleDateFormat("dd.MM.yyyy").format(rezervacijaLova.getDatumRezervacije()));
+        dnrForm.getCmbSezona().setSelectedItem(rezervacijaLova.getSezona());
+        dnrForm.getCmbOrganizatori().setSelectedItem(rezervacijaLova.getOrganizatorLova());
+        dnrForm.getCmbLovackeGrupe().setSelectedItem(rezervacijaLova.getLovackaGrupa());
+        dnrForm.getCmbOpstine().setSelectedItem(rezervacijaLova.getOpstina());
+        dnrForm.getTxtIznos().setText(String.valueOf(rezervacijaLova.getIznosRezervacije()));
+
+        ModelTabeleStavkaRezervacije mtsr = new ModelTabeleStavkaRezervacije(rezervacijaLova.getStavke());
+        dnrForm.getTblStavke().setModel(mtsr);
+
+        dnrForm.getBtnDodajRez().setVisible(false);
+        dnrForm.getBtnIzmeniRez().setVisible(true);
     }
 
     public void osveziTabeluStavki() {
-        ModelTabeleStavkaRezervacije mtsr = new ModelTabeleStavkaRezervacije(new ArrayList<>(stavke));
+        //ModelTabeleStavkaRezervacije mtsr = new ModelTabeleStavkaRezervacije(new ArrayList<>(stavke));
+        ModelTabeleStavkaRezervacije mtsr = new ModelTabeleStavkaRezervacije(rezervacijaLova.getStavke());
         dnrForm.getTblStavke().setModel(mtsr);
     }
 

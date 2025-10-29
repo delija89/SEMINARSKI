@@ -38,89 +38,96 @@ public class Kordinator {
     private MainFormKontroler mainFormKontorler;
     private PrikazSvihOrganizatoraKontroler psoKontorler;
     private DodajNovogOrganizatoraKontroler dnoKontroler;
-    
+
     private PrikazRezervacijaKontroler prKontroler;
     private DodajRezervacijuKontoler drKontroler;
     private DodajStavkuRezervacijeKontroler dsrKontroler;
-    
+
     private static Kordinator instanca;
-    
+
     private Kordinator() {
         parametri = new HashMap<>();
     }
-    
+
     public static Kordinator getInstanca() {
         if (instanca == null) {
             instanca = new Kordinator();
         }
         return instanca;
     }
-    
+
     public void otvoriLoginForm() {
         loginKontorler = new LoginKontorler(new LoginForm());//pravimo kontrolera za login formu ali i samu formu otvaramo
         loginKontorler.otvoriFormu(); //samo saljemo kontroleru da otvori formu
     }
-    
+
     public void otvoriMainFormu() {
         mainFormKontorler = new MainFormKontroler(new MainForm());
         mainFormKontorler.otvoriFormu();
     }
-    
+
     public void otvoriPrikazSvihOrganizatoraFormu() {
         psoKontorler = new PrikazSvihOrganizatoraKontroler(new PrikazSvihOrganizatoraForm());
         psoKontorler.otvoriFormu();
     }
-    
+
     public void otvoriDodajNovogOrganizatoraFormu() {
         dnoKontroler = new DodajNovogOrganizatoraKontroler(new DodajNovogOrganizatoraForm());
         dnoKontroler.otvoriFormu(FormaMod.DODAJ);
     }
-    
+
     public void otvoriIzmeniOrganizatoraFormu() {
         dnoKontroler = new DodajNovogOrganizatoraKontroler(new DodajNovogOrganizatoraForm());
         dnoKontroler.otvoriFormu(FormaMod.IZMENI);
     }
-    
+
     public void otvoriPrikazSvihRezervacijaFormu() {
         prKontroler = new PrikazRezervacijaKontroler(new PrikazRezervacijaForm());
         prKontroler.otvoriFormu();
     }
-    
+
+    public PrikazRezervacijaKontroler getPrKontroler() {
+        return prKontroler;
+    }
+
     public void otvoriDodajNovuRezervacijuFormu() {
         drKontroler = new DodajRezervacijuKontoler(new DodajNovuRezervacijuForm());
         drKontroler.otvoriFormu(FormaMod.DODAJ);
     }
-    
-    public void otvoriDodajStavkuRezervacijeFormu(){
+
+    public void otvoriIzmeniRezervacijuFormu() {
+        drKontroler = new DodajRezervacijuKontoler(new DodajNovuRezervacijuForm());
+        drKontroler.otvoriFormu(FormaMod.IZMENI);
+    }
+
+    public void otvoriDodajStavkuRezervacijeFormu() {
         dsrKontroler = new DodajStavkuRezervacijeKontroler(new DodajStavkuRezervacijeForm());
         dsrKontroler.otvoriFormu(FormaMod.DODAJ);
     }
-    
+
     public void dodajUListuDodatih(StavkaRezervacijeLova stavka) {
         drKontroler.getStavke().add(stavka);
         drKontroler.osveziTabeluStavki();
     }
-    
+
     public void osveziFormu() {
         psoKontorler.osveziFormu();
     }
-    
+
     public OrganizatorLova getUlogovani() {
         return ulogovani;
     }
-    
+
     public void setUlogovani(OrganizatorLova ulogovani) {
         this.ulogovani = ulogovani;
     }
-    
+
     public void dodajParam(String s, Object o) {
         parametri.put(s, o);
     }
-    
+
     public Object vratiParam(String s) {
         return parametri.get(s);
     }
 
-    
-    
 }

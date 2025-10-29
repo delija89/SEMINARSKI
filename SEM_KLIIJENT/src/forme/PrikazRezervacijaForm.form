@@ -36,7 +36,7 @@
                       <Component id="btnAzuriraj" min="-2" pref="194" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="402" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="401" max="-2" attributes="0"/>
                       <Component id="btnObrisiStavku" min="-2" pref="194" max="-2" attributes="0"/>
                   </Group>
               </Group>

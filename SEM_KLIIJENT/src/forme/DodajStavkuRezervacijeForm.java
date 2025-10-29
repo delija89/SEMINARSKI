@@ -21,6 +21,7 @@ public class DodajStavkuRezervacijeForm extends javax.swing.JFrame {
      */
     public DodajStavkuRezervacijeForm() {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**

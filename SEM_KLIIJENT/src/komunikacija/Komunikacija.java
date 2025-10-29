@@ -193,4 +193,15 @@ public class Komunikacija {
         }
     }
 
+    public void izmeniRezervaciju(RezervacijaLova rezervacijaLova) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacija.IZMENI_REZERVACIJU, rezervacijaLova);
+        posiljaoc.posalji(zahtev);
+        Odgovor odg = (Odgovor) primalac.primi();
+        if (odg.getOdgovor() == null) {
+            System.out.println("IZMENA REZERVACIJE JE USPESNA");
+        } else {
+            throw (Exception) odg.getOdgovor();
+        }
+    }
+
 }

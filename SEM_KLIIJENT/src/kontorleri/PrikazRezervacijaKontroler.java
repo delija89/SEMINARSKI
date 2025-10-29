@@ -7,6 +7,7 @@ package kontorleri;
 import domen.RezervacijaLova;
 import domen.StavkaRezervacijeLova;
 import forme.PrikazRezervacijaForm;
+import forme.mod.FormaMod;
 import forme.modeli.ModelTabeleRezervacija;
 import forme.modeli.ModelTabeleStavkaRezervacije;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import koridnator.Kordinator;
 
 /**
  *
@@ -75,6 +77,26 @@ public class PrikazRezervacijaKontroler {
                         ex.printStackTrace();
                     }
                 }
+            }
+        });
+
+        prForm.izmeniAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int red = prForm.getTblRezervacije().getSelectedRow();
+                if (red == -1) {
+                    JOptionPane.showMessageDialog(null, "Niste odabrali rezervaciju!");
+                    return;
+                }
+
+                ModelTabeleRezervacija mtr = (ModelTabeleRezervacija) prForm.getTblRezervacije().getModel();
+                RezervacijaLova rez = mtr.getLista().get(red);
+
+                List<StavkaRezervacijeLova> stavke = komunikacija.Komunikacija.getInstance().ucitajStavke(rez.getIdRezervacijaLova());
+                rez.setStavke(stavke);
+
+                Kordinator.getInstanca().dodajParam("rezervacijaLova", rez);
+                Kordinator.getInstanca().otvoriIzmeniRezervacijuFormu();
             }
         });
     }

@@ -418,4 +418,8 @@ public class DodajNovuRezervacijuForm extends javax.swing.JFrame {
         btnDodajStavku.addActionListener(actionListener);
     }
 
+    public void izmeniAddActionListener(ActionListener actionListener) {
+        btnIzmeniRez.addActionListener(actionListener);
+    }
+
 }

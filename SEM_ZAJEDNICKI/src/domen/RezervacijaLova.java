@@ -153,7 +153,9 @@ public class RezervacijaLova implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostZaIzmenu() {
-        return "datumRezervacije='" + datumRezervacije + "', sezona='" + sezona.toString() + "', iznosRezervacije=" + iznosRezervacije
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String datumString = sdf.format(datumRezervacije);
+        return "datumRezervacije='" + datumString + "', sezona='" + sezona.toString() + "', iznosRezervacije=" + iznosRezervacije
                 + ", idOrganizator=" + organizatorLova.getIdOrganizator() + ", idLovackaGrupa=" + lovackaGrupa.getIdLovackaGrupa()
                 + ", idOpstina=" + opstina.getIdOpstina();
     }

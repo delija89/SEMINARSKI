@@ -124,6 +124,15 @@ public class ObradaKlijentskihZahteva extends Thread {
                             odgovor.setOdgovor(e);
                         }
                         break;
+                    case IZMENI_REZERVACIJU:
+                        try {
+                            Kontroler.getInstance().izmeniRezervaciju((RezervacijaLova) zahtev.getParametar());
+                            odgovor.setOdgovor(null);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            odgovor.setOdgovor(e);
+                        }
+                        break;
                     default:
                         System.out.println("NIJE UNETA VALIDNA OPERACIJA!!!");
 

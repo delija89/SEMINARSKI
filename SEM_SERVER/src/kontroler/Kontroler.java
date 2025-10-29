@@ -19,6 +19,7 @@ import operacije.Organizator.ObrisiOrganizatoraLova;
 import operacije.login.LoginOperacija;
 import operacije.Organizator.UcitajOrganizatoreLova;
 import operacije.Rezervacija.DodajRezervaciju;
+import operacije.Rezervacija.IzmeniRezervaciju;
 import operacije.Rezervacija.ObrisiRezervaciju;
 import operacije.Rezervacija.Stavke.UcitajStavke;
 import operacije.Rezervacija.UcitajRezervacije;
@@ -113,6 +114,11 @@ public class Kontroler {
 
     public void obrisiRezervaciju(RezervacijaLova rezervacijaLova) throws Exception {
         ObrisiRezervaciju operacija = new ObrisiRezervaciju();
+        operacija.izvrsi(rezervacijaLova, null);
+    }
+
+    public void izmeniRezervaciju(RezervacijaLova rezervacijaLova) throws Exception {
+        IzmeniRezervaciju operacija = new IzmeniRezervaciju();
         operacija.izvrsi(rezervacijaLova, null);
     }
 

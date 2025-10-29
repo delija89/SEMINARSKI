@@ -88,7 +88,7 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(btnAzuriraj, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(402, 402, 402)
+                        .addGap(401, 401, 401)
                         .addComponent(btnObrisiStavku, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(97, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,5 +144,9 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
 
     public void ObrisiAddActionListener(ActionListener actionListener) {
         btnObrisi.addActionListener(actionListener);
+    }
+
+    public void izmeniAddActionListener(ActionListener actionListener) {
+        btnAzuriraj.addActionListener(actionListener);
     }
 }
