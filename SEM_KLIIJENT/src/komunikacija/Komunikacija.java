@@ -204,4 +204,15 @@ public class Komunikacija {
         }
     }
 
+    public void obrisiStavku(StavkaRezervacijeLova stavka) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacija.OBRISI_STAVKU, stavka);
+        posiljaoc.posalji(zahtev);
+        Odgovor odg = (Odgovor) primalac.primi();
+        if (odg.getOdgovor() == null) {
+            System.out.println("BRISANJE STAVKE REZERVACIJE JE USPESNO");
+        } else {
+            throw (Exception) odg.getOdgovor();
+        }
+    }
+
 }

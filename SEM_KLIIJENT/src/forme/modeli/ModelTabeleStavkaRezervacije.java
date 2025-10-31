@@ -62,4 +62,8 @@ public class ModelTabeleStavkaRezervacije extends AbstractTableModel {
                 return "N/A";
         }
     }
+
+    public void setLista(List<StavkaRezervacijeLova> stavke) {
+        this.lista = stavke;
+    }
 }

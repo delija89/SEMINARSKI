@@ -104,10 +104,11 @@ public class DodajRezervacijuKontoler {
                 Opstina opstina = (Opstina) dnrForm.getCmbOpstine().getSelectedItem();
 
                 double sumaStavki = 0;
-                for (StavkaRezervacijeLova stavkaRezervacijeLova : stavke) {
+                for (StavkaRezervacijeLova stavkaRezervacijeLova : rezervacijaLova.getStavke()) {
                     sumaStavki += stavkaRezervacijeLova.getIznos();
                 }
                 double iznosRezervacije = sumaStavki * lovackaGrupa.getBrojClanova();
+                rezervacijaLova.setIznosRezervacije(iznosRezervacije);
 
                 rezervacijaLova = new RezervacijaLova(-1, datumRezervacije, sezona, iznosRezervacije,
                         organizatorLova, lovackaGrupa, opstina);
@@ -135,13 +136,7 @@ public class DodajRezervacijuKontoler {
                     rezervacijaLova.setLovackaGrupa((LovackaGrupa) dnrForm.getCmbLovackeGrupe().getSelectedItem());
                     rezervacijaLova.setOpstina((Opstina) dnrForm.getCmbOpstine().getSelectedItem());
 
-                    double sumaStavki = 0;
-                    for (StavkaRezervacijeLova stavkaRezervacijeLova : rezervacijaLova.getStavke()) {
-                        sumaStavki += stavkaRezervacijeLova.getIznos();
-                    }
-                    double iznosRezervacije = sumaStavki * rezervacijaLova.getLovackaGrupa().getBrojClanova();
-                    rezervacijaLova.setIznosRezervacije(iznosRezervacije);
-
+                    preracunajIznose();
                     try {
                         komunikacija.Komunikacija.getInstance().izmeniRezervaciju(rezervacijaLova);
                     } catch (Exception ex) {
@@ -166,6 +161,58 @@ public class DodajRezervacijuKontoler {
 
             }
         });
+
+        dnrForm.obrisiStavkuAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int red = dnrForm.getTblStavke().getSelectedRow();
+                if (red == -1) {
+                    JOptionPane.showMessageDialog(null, "Niste odabrali stavku!");
+                    return;
+                }
+
+                int potvrda = JOptionPane.showConfirmDialog(
+                        null,
+                        "Da li ste sigurni da želite da obrišete izabranu stavku?",
+                        "Potvrda brisanja",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (potvrda == JOptionPane.YES_OPTION) {
+                    ModelTabeleStavkaRezervacije mtsr = (ModelTabeleStavkaRezervacije) dnrForm.getTblStavke().getModel();
+                    StavkaRezervacijeLova stavka = mtsr.getLista().get(red);
+
+                    try {
+                        komunikacija.Komunikacija.getInstance().obrisiStavku(stavka);
+                        rezervacijaLova.getStavke().remove(red);
+                        for (int i = 0; i < rezervacijaLova.getStavke().size(); i++) {
+                            rezervacijaLova.getStavke().get(i).setRb(i + 1);
+                        }
+
+                        mtsr.setLista(rezervacijaLova.getStavke());
+                        mtsr.fireTableDataChanged();
+                        preracunajIznose();
+                        //osveziTabeluStavki();
+                        //TREBA MI KAKO DA SE OSVEZE TABELE U IZMENI REZERVACIJE DA SE PONOVO SRACUNA IZNOS I DA 
+                        //SE OSVEZI TABELA NA PRIKAZ FORMI
+                        JOptionPane.showMessageDialog(null, "Sistem je obrisao stavku rezervacije lova!");
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Sistem ne moze da obrise stavku rezervacije lova!");
+                        ex.printStackTrace();
+                    }
+                }
+            }
+
+        });
+    }
+
+    private void preracunajIznose() {
+        double sumaStavki = 0;
+        for (StavkaRezervacijeLova stavkaRezervacijeLova : rezervacijaLova.getStavke()) {
+            sumaStavki += stavkaRezervacijeLova.getIznos();
+        }
+        double iznosRezervacije = sumaStavki * rezervacijaLova.getLovackaGrupa().getBrojClanova();
+        rezervacijaLova.setIznosRezervacije(iznosRezervacije);
     }
 
     private void popuniFormuSaPodacima() {

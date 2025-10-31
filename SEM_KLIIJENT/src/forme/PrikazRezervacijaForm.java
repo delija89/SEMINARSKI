@@ -149,4 +149,8 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
     public void izmeniAddActionListener(ActionListener actionListener) {
         btnAzuriraj.addActionListener(actionListener);
     }
+
+    public void obrisiStavkuAddActionListener(ActionListener actionListener) {
+        btnObrisiStavku.addActionListener(actionListener);
+    }
 }

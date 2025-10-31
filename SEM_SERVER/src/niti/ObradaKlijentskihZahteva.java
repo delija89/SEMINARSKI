@@ -133,6 +133,16 @@ public class ObradaKlijentskihZahteva extends Thread {
                             odgovor.setOdgovor(e);
                         }
                         break;
+
+                    case OBRISI_STAVKU:
+                        try {
+                            Kontroler.getInstance().obrisiStavku((StavkaRezervacijeLova) zahtev.getParametar());
+                            odgovor.setOdgovor(null);
+                        } catch (Exception e1) {
+                            e1.printStackTrace();
+                            odgovor.setOdgovor(e1);
+                        }
+                        break;
                     default:
                         System.out.println("NIJE UNETA VALIDNA OPERACIJA!!!");
 

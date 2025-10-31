@@ -99,6 +99,38 @@ public class PrikazRezervacijaKontroler {
                 Kordinator.getInstanca().otvoriIzmeniRezervacijuFormu();
             }
         });
+
+        prForm.obrisiStavkuAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int red = prForm.getTblStavke().getSelectedRow();
+                if (red == -1) {
+                    JOptionPane.showMessageDialog(null, "Niste odabrali stavku!");
+                    return;
+                }
+
+                int potvrda = JOptionPane.showConfirmDialog(
+                        null,
+                        "Da li ste sigurni da želite da obrišete izabranu stavku?",
+                        "Potvrda brisanja",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (potvrda == JOptionPane.YES_OPTION) {
+                    ModelTabeleStavkaRezervacije mtsr = (ModelTabeleStavkaRezervacije) prForm.getTblStavke().getModel();
+                    StavkaRezervacijeLova stavka = mtsr.getLista().get(red);
+
+                    try {
+                        komunikacija.Komunikacija.getInstance().obrisiStavku(stavka);
+                        JOptionPane.showMessageDialog(null, "Sistem je obrisao stavku rezervacije lova!");
+                        osveziFormu();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Sistem ne moze da obrise stavku rezervacije lova!");
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     public void otvoriFormu() {

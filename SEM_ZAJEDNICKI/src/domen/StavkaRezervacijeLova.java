@@ -135,12 +135,12 @@ public class StavkaRezervacijeLova implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiPrimarniKljuc() {
-        return "idRezervacijaLova = " + rezervacijaLova.getIdRezervacijaLova();
+        return "idRezervacijaLova = " + rezervacijaLova.getIdRezervacijaLova() + " AND rb=" + rb;
     }
 
     @Override
     public String vratiVrednostZaIzmenu() {
-        return "rb=" + rb + ", uslovi='" + uslovi + ", brojDana=" + brojDana + ", cena=" + cena
+        return "idRezervacijaLova=" + rezervacijaLova.getIdRezervacijaLova() + ", rb=" + rb + ", uslovi='" + uslovi + ", brojDana=" + brojDana + ", cena=" + cena
                 + "iznos=" + iznos + ", idVrstaLova=" + vrstaLova.getIdVrstaLova();
     }
 
