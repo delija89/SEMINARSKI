@@ -105,8 +105,17 @@ public class Kordinator {
         dsrKontroler.otvoriFormu(FormaMod.DODAJ);
     }
 
+    public void otvoriIzmeniStavkuFormu() {
+        dsrKontroler = new DodajStavkuRezervacijeKontroler(new DodajStavkuRezervacijeForm());
+        dsrKontroler.otvoriFormu(FormaMod.IZMENI);
+    }
+
     public void dodajUListuDodatih(StavkaRezervacijeLova stavka) {
         drKontroler.getStavke().add(stavka);
+        drKontroler.osveziTabeluStavki();
+    }
+
+    public void osveziFormuDodajRez() {
         drKontroler.osveziTabeluStavki();
     }
 

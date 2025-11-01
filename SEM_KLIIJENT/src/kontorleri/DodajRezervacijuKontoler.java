@@ -192,9 +192,6 @@ public class DodajRezervacijuKontoler {
                         mtsr.setLista(rezervacijaLova.getStavke());
                         mtsr.fireTableDataChanged();
                         preracunajIznose();
-                        //osveziTabeluStavki();
-                        //TREBA MI KAKO DA SE OSVEZE TABELE U IZMENI REZERVACIJE DA SE PONOVO SRACUNA IZNOS I DA 
-                        //SE OSVEZI TABELA NA PRIKAZ FORMI
                         JOptionPane.showMessageDialog(null, "Sistem je obrisao stavku rezervacije lova!");
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(null, "Sistem ne moze da obrise stavku rezervacije lova!");
@@ -203,6 +200,27 @@ public class DodajRezervacijuKontoler {
                 }
             }
 
+        });
+
+        dnrForm.addIzmeniStavkuActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int red = dnrForm.getTblStavke().getSelectedRow();
+
+                if (red == -1) {
+                    JOptionPane.showMessageDialog(null, "Niste odabrali stavku!");
+                    return;
+                }
+
+                ModelTabeleStavkaRezervacije mtsr = (ModelTabeleStavkaRezervacije) dnrForm.getTblStavke().getModel();
+                StavkaRezervacijeLova stavka = mtsr.getLista().get(red);
+
+                Kordinator.getInstanca().dodajParam("stavkaZaIzmenu", stavka);
+                Kordinator.getInstanca().dodajParam("rezervacijaLova", rezervacijaLova);
+
+                Kordinator.getInstanca().otvoriIzmeniStavkuFormu();
+                osveziTabeluStavki();
+            }
         });
     }
 

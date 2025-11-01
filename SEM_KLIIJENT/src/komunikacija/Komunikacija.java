@@ -215,4 +215,15 @@ public class Komunikacija {
         }
     }
 
+    public void izmeniStavku(StavkaRezervacijeLova stavkaZaIzmenu) throws Exception {
+        Zahtev zahtev = new Zahtev(Operacija.IZMENI_STAVKU, stavkaZaIzmenu);
+        posiljaoc.posalji(zahtev);
+        Odgovor odg = (Odgovor) primalac.primi();
+        if (odg.getOdgovor() == null) {
+            System.out.println("IZMENA STAVKE REZERVACIJE JE USPESNA");
+        } else {
+            throw (Exception) odg.getOdgovor();
+        }
+    }
+
 }

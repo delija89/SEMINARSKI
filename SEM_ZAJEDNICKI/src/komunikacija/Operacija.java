@@ -24,6 +24,7 @@ public enum Operacija implements Serializable {
     DODAJ_REZERVACIJU_LOVA,
     OBRISI_REZERVACIJU,
     IZMENI_REZERVACIJU,
-    OBRISI_STAVKU
+    OBRISI_STAVKU,
+    IZMENI_STAVKU
 
 }

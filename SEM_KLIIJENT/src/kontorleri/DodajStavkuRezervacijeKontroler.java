@@ -12,7 +12,10 @@ import forme.mod.FormaMod;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import komunikacija.Komunikacija;
 import koridnator.Kordinator;
 
 /**
@@ -46,11 +49,29 @@ public class DodajStavkuRezervacijeKontroler {
                 VrstaLova vrstaLova = (VrstaLova) dsrForm.getCmbVrstaLova().getSelectedItem();
                 double iznos = (double) brojDana * cena;
 
+                StavkaRezervacijeLova stavkaZaIzmenu = (StavkaRezervacijeLova) Kordinator.getInstanca().vratiParam("stavkaZaIzmenu");
+                if (stavkaZaIzmenu != null) {
+                    stavkaZaIzmenu.setUslovi(uslovi);
+                    stavkaZaIzmenu.setBrojDana(brojDana);
+                    stavkaZaIzmenu.setCena(cena);
+                    stavkaZaIzmenu.setVrstaLova(vrstaLova);
+                    stavkaZaIzmenu.setIznos(iznos);
+
+                    try {
+                        Komunikacija.getInstance().izmeniStavku(stavkaZaIzmenu);
+                        JOptionPane.showMessageDialog(null, "Sistem je izmenio stavku rezervacije lova");
+                        Kordinator.getInstanca().dodajParam("stavkaZaIzmenu", null); // reset parametra
+                        Kordinator.getInstanca().osveziFormuDodajRez();
+                        dsrForm.dispose();
+                        return;
+                    } catch (Exception ex) {
+                        Logger.getLogger(DodajStavkuRezervacijeKontroler.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
                 int rb = rez.getStavke().size() + 1;
                 StavkaRezervacijeLova stavka = new StavkaRezervacijeLova(rez, rb, uslovi, brojDana, cena, vrstaLova, iznos);
-                //stavka.setRezervacijaLova(rez);
                 rez.getStavke().add(stavka);
-                
 
                 try {
 
@@ -75,6 +96,14 @@ public class DodajStavkuRezervacijeKontroler {
         List<VrstaLova> vrsta = komunikacija.Komunikacija.getInstance().ucitajVrsteLova();
         dsrForm.getCmbVrstaLova().removeAllItems();
         vrsta.forEach(vl -> dsrForm.getCmbVrstaLova().addItem(vl));
+
+        StavkaRezervacijeLova stavkaZaIzmenu = (StavkaRezervacijeLova) Kordinator.getInstanca().vratiParam("stavkaZaIzmenu");
+        if (stavkaZaIzmenu != null) {
+            dsrForm.getTxtUslovi().setText(stavkaZaIzmenu.getUslovi());
+            dsrForm.getTxtBrojDana().setText(String.valueOf(stavkaZaIzmenu.getBrojDana()));
+            dsrForm.getTxtCena().setText(String.valueOf(stavkaZaIzmenu.getCena()));
+            dsrForm.getCmbVrstaLova().setSelectedItem(stavkaZaIzmenu.getVrstaLova());
+        }
     }
 
 }
