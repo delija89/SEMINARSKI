@@ -131,6 +131,44 @@ public class PrikazRezervacijaKontroler {
                 }
             }
         });
+
+        prForm.pretraziAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String ime = prForm.getTxtImeOrganizatora().getText().trim();
+
+                if (ime.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Unesite ime organizatora za pretragu!");
+                    return;
+                }
+
+                try {
+                    List<RezervacijaLova> sveRezervacije = komunikacija.Komunikacija.getInstance().ucitajRezervacije();
+
+                    List<RezervacijaLova> filtrirane = new ArrayList<>();
+                    for (RezervacijaLova rl : sveRezervacije) {
+                        if (rl.getOrganizatorLova().getIme().equalsIgnoreCase(ime)) {
+                            filtrirane.add(rl);
+                        }
+                    }
+
+                    if (filtrirane.isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Nema rezervacija za datog organizatora!");
+                        return;
+                    }
+
+                    ModelTabeleRezervacija mtr = new ModelTabeleRezervacija(filtrirane);
+                    prForm.getTblRezervacije().setModel(mtr);
+
+                    JOptionPane.showMessageDialog(null, "Sistem je nasao rezervacije lova po zadatim kriterijumima");
+                    ucitajStavkeRezervacija();
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Greška pri filtriranju rezervacija!");
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
 
     public void otvoriFormu() {

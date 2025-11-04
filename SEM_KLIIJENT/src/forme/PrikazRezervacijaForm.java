@@ -7,6 +7,7 @@ package forme;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -38,6 +39,9 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblRezervacije = new javax.swing.JTable();
         btnObrisiStavku = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtImeOrganizatora = new javax.swing.JTextField();
+        btnPretrazi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +77,10 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
 
         btnObrisiStavku.setText("OBRISI STAVKU");
 
+        jLabel1.setText("Unesite ime organizatora:");
+
+        btnPretrazi.setText("PRETRAZI");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,7 +97,14 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
                         .addComponent(btnAzuriraj, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(390, 390, 390)
-                        .addComponent(btnObrisiStavku, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnObrisiStavku, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(184, 184, 184)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtImeOrganizatora, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(129, 129, 129)
+                        .addComponent(btnPretrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(97, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -100,7 +115,12 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(323, 323, 323)
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtImeOrganizatora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPretrazi))
+                .addGap(257, 257, 257)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAzuriraj)
                     .addComponent(btnObrisi))
@@ -127,15 +147,22 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
         return tblStavke;
     }
 
+    public JTextField getTxtImeOrganizatora() {
+        return txtImeOrganizatora;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAzuriraj;
     private javax.swing.JButton btnObrisi;
     private javax.swing.JButton btnObrisiStavku;
+    private javax.swing.JButton btnPretrazi;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblRezervacije;
     private javax.swing.JTable tblStavke;
+    private javax.swing.JTextField txtImeOrganizatora;
     // End of variables declaration//GEN-END:variables
 
     public void stavkeAddMouseListener(MouseAdapter mouseAdapter) {
@@ -152,5 +179,9 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
 
     public void obrisiStavkuAddActionListener(ActionListener actionListener) {
         btnObrisiStavku.addActionListener(actionListener);
+    }
+
+    public void pretraziAddActionListener(ActionListener actionListener) {
+        btnPretrazi.addActionListener(actionListener);
     }
 }

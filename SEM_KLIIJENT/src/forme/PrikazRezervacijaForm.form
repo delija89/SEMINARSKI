@@ -39,6 +39,14 @@
                       <EmptySpace min="-2" pref="390" max="-2" attributes="0"/>
                       <Component id="btnObrisiStavku" min="-2" pref="194" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="184" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="txtImeOrganizatora" min="-2" pref="279" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
+                      <Component id="btnPretrazi" min="-2" pref="118" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="97" max="32767" attributes="0"/>
           </Group>
@@ -54,7 +62,13 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="323" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtImeOrganizatora" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPretrazi" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="257" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnAzuriraj" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnObrisi" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -131,6 +145,18 @@
     <Component class="javax.swing.JButton" name="btnObrisiStavku">
       <Properties>
         <Property name="text" type="java.lang.String" value="OBRISI STAVKU"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Unesite ime organizatora:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtImeOrganizatora">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPretrazi">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="PRETRAZI"/>
       </Properties>
     </Component>
   </SubComponents>
