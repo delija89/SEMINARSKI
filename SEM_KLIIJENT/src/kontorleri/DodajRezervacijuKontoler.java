@@ -45,16 +45,14 @@ public class DodajRezervacijuKontoler {
     }
 
     public void otvoriFormu(FormaMod mod) {
-        pripremiFormu(mod);
         if (mod.equals(FormaMod.DODAJ)) {
             this.rezervacijaLova = new RezervacijaLova();
             this.rezervacijaLova.setStavke(new ArrayList<>());
         } else {
             this.rezervacijaLova = (RezervacijaLova) Kordinator.getInstanca().vratiParam("rezervacijaLova");
-            popuniFormuSaPodacima();
         }
         Kordinator.getInstanca().dodajParam("rezervacijaLova", this.rezervacijaLova);
-        //pripremiFormu(mod);
+        pripremiFormu(mod);
         dnrForm.setLocationRelativeTo(null);
         dnrForm.setVisible(true);
     }
@@ -79,6 +77,10 @@ public class DodajRezervacijuKontoler {
         if (mod.equals(FormaMod.DODAJ)) {
             dnrForm.getBtnIzmeniRez().setVisible(false);
             dnrForm.getBtnDodajRez().setVisible(true);
+        } else {
+            popuniFormuSaPodacima();
+            dnrForm.getBtnIzmeniRez().setVisible(true);
+            dnrForm.getBtnDodajRez().setVisible(false);
         }
     }
 
