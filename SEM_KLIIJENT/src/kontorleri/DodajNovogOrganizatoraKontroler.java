@@ -41,17 +41,25 @@ public class DodajNovogOrganizatoraKontroler {
                 Opstina o = (Opstina) dnoForm.getCmbOpstina().getSelectedItem();
                 String username = dnoForm.getTxtUsername().getText();
                 String password = String.valueOf(dnoForm.getTxtPassword().getPassword());
-                OrganizatorLova ol = new OrganizatorLova(0, ime, prezime, email, o, username, password);
 
-                try {
-                    Komunikacija.getInstance().dodajNovogOrganizatora(ol);
-                    JOptionPane.showMessageDialog(null, "Sistem je zapamtio organizatora lova");
-                    dnoForm.dispose();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Sistem ne može da zapamti organizatora lova");
-                    ex.printStackTrace();
+                if (ime.isEmpty() || prezime.isEmpty() || email.isEmpty() || o == null || username.isEmpty() || password.isEmpty()
+                        || ime == "" || prezime == "" || email == "" || username == "" || password == "") {
+                    JOptionPane.showMessageDialog(null,
+                            "Sva polja moraju biti popunjena!",
+                            "Greška",
+                            JOptionPane.ERROR_MESSAGE);
+                    return; // prekida dalje izvršenje
+                } else {
+                    OrganizatorLova ol = new OrganizatorLova(0, ime, prezime, email, o, username, password);
+                    try {
+                        Komunikacija.getInstance().dodajNovogOrganizatora(ol);
+                        JOptionPane.showMessageDialog(null, "Sistem je zapamtio organizatora lova");
+                        dnoForm.dispose();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Sistem ne može da zapamti organizatora lova");
+                        ex.printStackTrace();
+                    }
                 }
-
             }
 
         }
@@ -66,19 +74,27 @@ public class DodajNovogOrganizatoraKontroler {
                 Opstina o = (Opstina) dnoForm.getCmbOpstina().getSelectedItem();
                 String username = dnoForm.getTxtUsername().getText();
                 String password = String.valueOf(dnoForm.getTxtPassword().getPassword());
-                OrganizatorLova ol1 = new OrganizatorLova(ol.getIdOrganizator(), ime, prezime, email, o, username, password);
 
-                try {
-                    Komunikacija.getInstance().azurirajOrganizatora(ol1);
-                    JOptionPane.showMessageDialog(null, "Sistem je zapamtio organizatora lova");
-                    dnoForm.dispose();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Sistem ne može da zapamti organizatora lova");
-                    ex.printStackTrace();
+                if (ime.isEmpty() || prezime.isEmpty() || email.isEmpty() || o == null || username.isEmpty() || password.isEmpty()
+                        || ime == "" || prezime == "" || email == "" || username == "" || password == "") {
+                    JOptionPane.showMessageDialog(null,
+                            "Sva polja moraju biti popunjena!",
+                            "Greška",
+                            JOptionPane.ERROR_MESSAGE);
+                    return; // prekida dalje izvršenje
+                } else {
+                    OrganizatorLova ol1 = new OrganizatorLova(ol.getIdOrganizator(), ime, prezime, email, o, username, password);
+                    try {
+                        Komunikacija.getInstance().azurirajOrganizatora(ol1);
+                        JOptionPane.showMessageDialog(null, "Sistem je zapamtio organizatora lova");
+                        dnoForm.dispose();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Sistem ne može da zapamti organizatora lova");
+                        ex.printStackTrace();
+                    }
+
                 }
-
             }
-
         }
         );
     }

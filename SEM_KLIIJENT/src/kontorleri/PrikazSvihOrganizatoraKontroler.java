@@ -40,12 +40,27 @@ public class PrikazSvihOrganizatoraKontroler {
                 } else {
                     ModelTabeleOrganizator mto = (ModelTabeleOrganizator) psoForm.getTblOrganizatori().getModel();
                     OrganizatorLova ol = mto.getLista().get(row);
-                    try {
-                        Komunikacija.getInstance().obrisiOrganizatora(ol);
-                        JOptionPane.showMessageDialog(psoForm, "Sistem je uspesno obrisao organizatora lova", "USPEH", JOptionPane.INFORMATION_MESSAGE);
-                        ucitajOrganizatore();//da bi se refreshovala tabela
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(psoForm, "Sistem ne moze da obrise organizatora lova!", "GRESKA", JOptionPane.ERROR_MESSAGE);
+                    int potvrda = JOptionPane.showConfirmDialog(
+                            psoForm,
+                            "Da li ste sigurni da želite da obrišete organizatora: " + ol.getIme() + " " + ol.getPrezime() + "?",
+                            "Potvrda brisanja",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                    if (potvrda == JOptionPane.YES_OPTION) {
+                        try {
+                            Komunikacija.getInstance().obrisiOrganizatora(ol);
+                            JOptionPane.showMessageDialog(psoForm,
+                                    "Sistem je uspešno obrisao organizatora lova.",
+                                    "USPEH",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            ucitajOrganizatore(); // osvežavanje tabele
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(psoForm,
+                                    "Sistem ne može da obriše organizatora lova!",
+                                    "GREŠKA",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
             }
