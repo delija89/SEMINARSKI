@@ -26,7 +26,8 @@ public class StavkaRezervacijeLova implements ApstraktniDomenskiObjekat {
     public StavkaRezervacijeLova() {
     }
 
-    public StavkaRezervacijeLova(RezervacijaLova rezervacijaLova, int rb, String uslovi, int brojDana, double cena, VrstaLova vrstaLova, double iznos) {
+    public StavkaRezervacijeLova(RezervacijaLova rezervacijaLova, int rb, String uslovi,
+            int brojDana, double cena, VrstaLova vrstaLova, double iznos) {
         this.rezervacijaLova = rezervacijaLova;
         this.rb = rb;
         this.uslovi = uslovi;
@@ -174,11 +175,6 @@ public class StavkaRezervacijeLova implements ApstraktniDomenskiObjekat {
             lista.add(stavkaRezervacijeLova);
         }
         return lista;
-    }
-
-    @Override
-    public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

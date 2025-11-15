@@ -24,6 +24,17 @@ public class OrganizatorLova implements ApstraktniDomenskiObjekat {
     private String username;
     private String password;
 
+    public OrganizatorLova(int idOrganizator, String ime, String prezime, String email,
+            Opstina opstina, String username, String password) {
+        this.idOrganizator = idOrganizator;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.email = email;
+        this.opstina = opstina;
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -41,16 +52,6 @@ public class OrganizatorLova implements ApstraktniDomenskiObjekat {
     }
 
     public OrganizatorLova() {
-    }
-
-    public OrganizatorLova(int idOrganizator, String ime, String prezime, String email, Opstina opstina, String username, String password) {
-        this.idOrganizator = idOrganizator;
-        this.ime = ime;
-        this.prezime = prezime;
-        this.email = email;
-        this.opstina = opstina;
-        this.username = username;
-        this.password = password;
     }
 
     public Opstina getOpstina() {
@@ -150,11 +151,6 @@ public class OrganizatorLova implements ApstraktniDomenskiObjekat {
             lista.add(ol);
         }
         return lista;
-    }
-
-    @Override
-    public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
