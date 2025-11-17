@@ -37,8 +37,11 @@ public class LoginKontorler {
                 String password = String.valueOf(lf.getTxtPassword().getPassword()); // slicno za password
                 System.out.println(username);
                 System.out.println(password);
+                if (username.isEmpty() || password.isEmpty()) {
+                    JOptionPane.showMessageDialog(lf, "Uneti kredencijali nisu dobri", "GRESKA", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-                //OrganizatorLova ol = new OrganizatorLova(); //nemamo sve podatke pa nije bas logicno
                 Komunikacija.getInstance().konekcija(); //usposatavimo konekciju sa bazom
                 OrganizatorLova ulogovani = Komunikacija.getInstance().login(username, password); //metodu za prijavu korisnika 
 
