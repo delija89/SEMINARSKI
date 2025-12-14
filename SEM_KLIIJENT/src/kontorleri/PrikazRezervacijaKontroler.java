@@ -151,17 +151,17 @@ public class PrikazRezervacijaKontroler {
                             filtrirane.add(rl);
                         }
                     }
+                    ModelTabeleRezervacija mtr = new ModelTabeleRezervacija(filtrirane);
+                    prForm.getTblRezervacije().setModel(mtr);
 
                     if (filtrirane.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Nema rezervacija za datog organizatora!");
                         return;
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                "Sistem je našao rezervacije lova po zadatim kriterijumima");
+                        ucitajStavkeRezervacija();
                     }
-
-                    ModelTabeleRezervacija mtr = new ModelTabeleRezervacija(filtrirane);
-                    prForm.getTblRezervacije().setModel(mtr);
-
-                    JOptionPane.showMessageDialog(null, "Sistem je nasao rezervacije lova po zadatim kriterijumima");
-                    ucitajStavkeRezervacija();
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "Greška pri filtriranju rezervacija!");
