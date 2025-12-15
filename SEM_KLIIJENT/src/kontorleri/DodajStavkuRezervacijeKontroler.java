@@ -12,10 +12,7 @@ import forme.mod.FormaMod;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import komunikacija.Komunikacija;
 import koridnator.Kordinator;
 
 /**
@@ -57,16 +54,12 @@ public class DodajStavkuRezervacijeKontroler {
                     stavkaZaIzmenu.setVrstaLova(vrstaLova);
                     stavkaZaIzmenu.setIznos(iznos);
 
-                    try {
-                        Komunikacija.getInstance().izmeniStavku(stavkaZaIzmenu);
-                        JOptionPane.showMessageDialog(null, "Sistem je izmenio stavku rezervacije lova");
-                        Kordinator.getInstanca().dodajParam("stavkaZaIzmenu", null); // reset parametra
-                        Kordinator.getInstanca().osveziFormuDodajRez();
-                        dsrForm.dispose();
-                        return;
-                    } catch (Exception ex) {
-                        Logger.getLogger(DodajStavkuRezervacijeKontroler.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    Kordinator.getInstanca().dodajParam("stavkaZaIzmenu", null);
+
+                    Kordinator.getInstanca().osveziFormuDodajRez();
+
+                    dsrForm.dispose();
+                    return;
                 }
 
                 int rb = rez.getStavke().size() + 1;

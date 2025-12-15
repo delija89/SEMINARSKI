@@ -86,7 +86,6 @@ public class DodajRezervacijuKontoler {
 
     private void addActionListeners() {
 
-        // Dodavanje rezervacije
         dnrForm.dodajAddActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -119,7 +118,6 @@ public class DodajRezervacijuKontoler {
                 for (StavkaRezervacijeLova stavkaRezervacijeLova : rezervacijaLova.getStavke()) {
                     sumaStavki += stavkaRezervacijeLova.getIznos();
                 }
-                //double iznosRezervacije = sumaStavki * lovackaGrupa.getBrojClanova();
                 LovackaGrupa selektovanaGrupa = (LovackaGrupa) dnrForm.getCmbLovackeGrupe().getSelectedItem();
                 double iznosRezervacije = sumaStavki * selektovanaGrupa.getBrojClanova();
                 dnrForm.getTxtIznos().setText(String.valueOf(iznosRezervacije));
@@ -154,7 +152,9 @@ public class DodajRezervacijuKontoler {
                     rezervacijaLova.setLovackaGrupa((LovackaGrupa) dnrForm.getCmbLovackeGrupe().getSelectedItem());
                     rezervacijaLova.setOpstina((Opstina) dnrForm.getCmbOpstine().getSelectedItem());
 
-                    preracunajIznose();
+                    //preracunajIznose();
+                    preracunajIznosZaCuvanje();
+
                     try {
                         komunikacija.Komunikacija.getInstance().izmeniRezervaciju(rezervacijaLova);
                     } catch (Exception ex) {
@@ -176,7 +176,6 @@ public class DodajRezervacijuKontoler {
             @Override
             public void actionPerformed(ActionEvent e
             ) {
-
                 Kordinator.getInstanca().dodajParam("rezervacijaLova", rezervacijaLova);
                 Kordinator.getInstanca().otvoriDodajStavkuRezervacijeFormu();
                 preracunajIznose();
@@ -207,8 +206,8 @@ public class DodajRezervacijuKontoler {
                     StavkaRezervacijeLova stavka = mtsr.getLista().get(red);
 
                     try {
-                        komunikacija.Komunikacija.getInstance().obrisiStavku(stavka);
                         rezervacijaLova.getStavke().remove(red);
+                        osveziTabeluStavki();
                         for (int i = 0; i < rezervacijaLova.getStavke().size(); i++) {
                             rezervacijaLova.getStavke().get(i).setRb(i + 1);
                         }
@@ -258,11 +257,21 @@ public class DodajRezervacijuKontoler {
         for (StavkaRezervacijeLova stavkaRezervacijeLova : rezervacijaLova.getStavke()) {
             sumaStavki += stavkaRezervacijeLova.getIznos();
         }
-        //double iznosRezervacije = sumaStavki * rezervacijaLova.getLovackaGrupa().getBrojClanova();
         LovackaGrupa selektovanaGrupa = (LovackaGrupa) dnrForm.getCmbLovackeGrupe().getSelectedItem();
         double iznosRezervacije = sumaStavki * selektovanaGrupa.getBrojClanova();
         dnrForm.getTxtIznos().setText(String.valueOf(iznosRezervacije));
-        rezervacijaLova.setIznosRezervacije(iznosRezervacije);
+        //rezervacijaLova.setIznosRezervacije(iznosRezervacije);
+    }
+
+    private void preracunajIznosZaCuvanje() {
+        double sumaStavki = 0;
+        for (StavkaRezervacijeLova s : rezervacijaLova.getStavke()) {
+            sumaStavki += s.getIznos();
+        }
+        LovackaGrupa grupa
+                = (LovackaGrupa) dnrForm.getCmbLovackeGrupe().getSelectedItem();
+        double iznos = sumaStavki * grupa.getBrojClanova();
+        rezervacijaLova.setIznosRezervacije(iznos);
     }
 
     private void popuniFormuSaPodacima() {
@@ -281,7 +290,6 @@ public class DodajRezervacijuKontoler {
     }
 
     public void osveziTabeluStavki() {
-        //ModelTabeleStavkaRezervacije mtsr = new ModelTabeleStavkaRezervacije(new ArrayList<>(stavke));
         ModelTabeleStavkaRezervacije mtsr = new ModelTabeleStavkaRezervacije(rezervacijaLova.getStavke());
         dnrForm.getTblStavke().setModel(mtsr);
         preracunajIznose();
