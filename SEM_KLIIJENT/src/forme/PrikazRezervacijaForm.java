@@ -35,10 +35,9 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblStavke = new javax.swing.JTable();
         btnObrisi = new javax.swing.JButton();
-        btnAzuriraj = new javax.swing.JButton();
+        btnDetalji = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblRezervacije = new javax.swing.JTable();
-        btnObrisiStavku = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtImeOrganizatora = new javax.swing.JTextField();
         btnPretrazi = new javax.swing.JButton();
@@ -60,7 +59,7 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
 
         btnObrisi.setText("OBRISI");
 
-        btnAzuriraj.setText("AZURIRAJ");
+        btnDetalji.setText("DETALJI REZERVACIJE");
 
         tblRezervacije.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,8 +73,6 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(tblRezervacije);
-
-        btnObrisiStavku.setText("OBRISI STAVKU");
 
         jLabel1.setText("Unesite ime organizatora:");
 
@@ -94,10 +91,7 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
                         .addGap(290, 290, 290)
                         .addComponent(btnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
-                        .addComponent(btnAzuriraj, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(390, 390, 390)
-                        .addComponent(btnObrisiStavku, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnDetalji, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(184, 184, 184)
                         .addComponent(jLabel1)
@@ -122,13 +116,11 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
                     .addComponent(btnPretrazi))
                 .addGap(257, 257, 257)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAzuriraj)
+                    .addComponent(btnDetalji)
                     .addComponent(btnObrisi))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnObrisiStavku)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(105, 105, 105)
@@ -153,9 +145,8 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAzuriraj;
+    private javax.swing.JButton btnDetalji;
     private javax.swing.JButton btnObrisi;
-    private javax.swing.JButton btnObrisiStavku;
     private javax.swing.JButton btnPretrazi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -174,11 +165,7 @@ public class PrikazRezervacijaForm extends javax.swing.JFrame {
     }
 
     public void izmeniAddActionListener(ActionListener actionListener) {
-        btnAzuriraj.addActionListener(actionListener);
-    }
-
-    public void obrisiStavkuAddActionListener(ActionListener actionListener) {
-        btnObrisiStavku.addActionListener(actionListener);
+        btnDetalji.addActionListener(actionListener);
     }
 
     public void pretraziAddActionListener(ActionListener actionListener) {
