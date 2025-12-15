@@ -47,7 +47,8 @@ public class ModelTabeleStavkaRezervacije extends AbstractTableModel {
         StavkaRezervacijeLova stavka = lista.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return stavka.getRb();
+                return rowIndex + 1;
+                //return stavka.getRb();
             case 1:
                 return stavka.getUslovi();
             case 2:
